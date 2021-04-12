@@ -3,6 +3,7 @@
 # Simple MineSweeper program
 
 # Import
+import random
 
 # Constants
 X = 30  # width
@@ -11,7 +12,8 @@ BEGINNER = 33 # number of mines based on difficulty level
 MEDIUM = 66
 EXPERT = 99
 UNKNOWN = "."
-MINE = "M"
+UNKNOWN_MINE = "."
+KNOWN_MINE = "M"
 BLANK = " "
 
 
@@ -39,8 +41,20 @@ def get_level():  # determine what level of game to play
             valid_value = True
     return level
 
-def add_mines(grid):
-    pass
+def add_mines(grid, level, MINE):
+    if level == "1":
+        num_mines = BEGINNER
+    elif level == "2":
+        num_mines = MEDIUM
+    else:
+        num_mines = EXPERT
+
+    for j in range(num_mines):
+        index = random.randint(0, len(grid) - 1)
+        grid[index] = MINE
+
+    return(grid)
+    
 
 
 
@@ -51,3 +65,6 @@ show_grid(X, Y, grid)
 level = get_level()
 
 print(level)   # DEBUG
+
+grid = add_mines(grid, level, UNKNOWN_MINE)
+show_grid(X, Y, grid)
