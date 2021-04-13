@@ -26,6 +26,8 @@ def create_grid(height, width, init_value):
     return game_list
 
 def show_grid(x, y, grid):
+    print() # blank line
+    print() # blank line
     for j in range(y):
         row = ""  # initialize blank row
         for k in range(x):
