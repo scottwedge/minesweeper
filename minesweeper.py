@@ -46,7 +46,7 @@ def show_level(level):
 def get_level():  # determine what level of game to play
     valid_value = False
     while not valid_value:
-        level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Expert\n")
+        level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Advanced\n 4. Expert\n")
         if level not in ["1", "2", "3", "4"]:
             print("{} is not a valid value ... try again!".format(level))
         else:
@@ -78,8 +78,6 @@ grid = create_grid(X, Y, UNKNOWN)
 show_grid(X, Y, grid)
 
 level = get_level()
-
-print(level)   # DEBUG
 
 grid = add_mines(grid, level, UNKNOWN_MINE)
 show_grid(X, Y, grid)
