@@ -8,8 +8,9 @@ import random
 # Constants
 X = 30  # width
 Y = 16  # height
-BEGINNER = 33 # number of mines based on difficulty level
-MEDIUM = 66
+BEGINNER = 25 # number of mines based on difficulty level
+MEDIUM = 50
+ADVANCED = 75
 EXPERT = 99
 UNKNOWN = "."
 UNKNOWN_MINE = "."
@@ -35,7 +36,7 @@ def get_level():  # determine what level of game to play
     valid_value = False
     while not valid_value:
         level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Expert\n")
-        if level not in ["1", "2", "3"]:
+        if level not in ["1", "2", "3", "4"]:
             print("{} is not a valid value ... try again!".format(level))
         else:
             valid_value = True
