@@ -31,6 +31,17 @@ def show_grid(x, y, grid):
         for k in range(x):
             row = row + grid[k + j*x]  # add to row
         print(row)
+
+def show_level(level):
+    if level == "1":
+        print("Game level is Beginner")
+    elif level == "2":
+        print("Game level is Medium")
+    elif level == "3":
+        print("Game level is Advanced")
+    else:   # level == 4
+        print("Game level is Expert")
+      
            
 def get_level():  # determine what level of game to play
     valid_value = False
@@ -39,6 +50,7 @@ def get_level():  # determine what level of game to play
         if level not in ["1", "2", "3", "4"]:
             print("{} is not a valid value ... try again!".format(level))
         else:
+            show_level(level)
             valid_value = True
     return level
 
@@ -47,12 +59,14 @@ def add_mines(grid, level, MINE):
         num_mines = BEGINNER
     elif level == "2":
         num_mines = MEDIUM
-    else:
+    elif level == "3":
+        num_mines = ADVANCED
+    else:    # level == 4
         num_mines = EXPERT
 
     for j in range(num_mines):
         index = random.randint(0, len(grid) - 1)
-        grid[index] = MINE
+        grid[index] = KNOWN_MINE
 
     return(grid)
     
