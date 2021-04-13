@@ -70,6 +70,10 @@ def add_mines(grid, level, MINE):
 
     return(grid)
     
+def enter_choice():
+    x = input("Enter x value choice: ")
+    y = input("Enter y value choice: ")
+    return (x,y)
 
 
 
@@ -81,3 +85,9 @@ level = get_level()
 
 grid = add_mines(grid, level, UNKNOWN_MINE)
 show_grid(X, Y, grid)
+
+playing_game = True
+
+while playing_game:
+    show_grid(X, Y, grid)
+    (x,y) = enter_choice()
