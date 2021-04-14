@@ -25,6 +25,18 @@ def create_grid(height, width, init_value):
         game_list.append(init_value)
     return game_list
 
+def print_top_x_value(x):
+    s = "  " # initialize blank string for two digit wide y column
+    for j in range(x):
+        s = s + str(j // 10)
+    print(s)
+
+def print_bottom_x_value(x):
+    s = "  " # initialize blank string for two digit wide y column
+    for j in range(x):
+        s = s + str(j % 10)
+    print(s)
+
 def show_grid(x, y, grid):
     print() # blank line
     print() # blank line
@@ -33,6 +45,8 @@ def show_grid(x, y, grid):
         for k in range(x):
             row = row + grid[k + j*x]  # add to row
         print(row)
+    print_top_x_value(X)
+    print_bottom_x_value(X)
 
 def show_level(level):
     if level == "1":
