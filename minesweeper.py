@@ -88,10 +88,21 @@ def add_mines(grid, level, MINE):
 
     return(grid)
     
-def enter_choice():
+def enter_choice(width, height):
     print() # blank line
-    x = input("Enter x value choice: ")
-    y = input("Enter y value choice: ")
+    valid_x = False
+    while not valid_x:
+        x = input("Enter x value choice: ")
+        if x in range(width):
+            valid_x = True
+        else:
+            print("{} is not a valid value, try again".format(x))
+    while not valid_y:
+        y = input("Enter y value choice: ")
+        if x in range(height):
+            valid_y = True
+        else:
+            print("{} is not a valid value, try again".format(y))
     print("You entered co-ordinates of {},{}".format(x, y))
     return (x,y)
 
@@ -110,4 +121,4 @@ playing_game = True
 
 while playing_game:
     show_grid(X, Y, grid)
-    (x,y) = enter_choice()
+    (x,y) = enter_choice(X, Y)
