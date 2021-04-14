@@ -75,6 +75,7 @@ def add_mines(grid, level, MINE):
 def enter_choice():
     x = input("Enter x value choice: ")
     y = input("Enter y value choice: ")
+    print("You entered co-ordinates of {},{}".format(x, y))
     return (x,y)
 
 
