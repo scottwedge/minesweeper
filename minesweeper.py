@@ -29,7 +29,7 @@ def show_grid(x, y, grid):
     print() # blank line
     print() # blank line
     for j in range(y):
-        row = ""  # initialize blank row
+        row = "{:2d}".format(y-j-1)  # first character is Y axis value
         for k in range(x):
             row = row + grid[k + j*x]  # add to row
         print(row)
