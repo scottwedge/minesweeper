@@ -60,6 +60,8 @@ def show_level(level):
       
            
 def get_level():  # determine what level of game to play
+    print() # blank line
+    print() # blank line
     valid_value = False
     while not valid_value:
         level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Advanced\n 4. Expert\n")
@@ -87,6 +89,7 @@ def add_mines(grid, level, MINE):
     return(grid)
     
 def enter_choice():
+    print() # blank line
     x = input("Enter x value choice: ")
     y = input("Enter y value choice: ")
     print("You entered co-ordinates of {},{}".format(x, y))
