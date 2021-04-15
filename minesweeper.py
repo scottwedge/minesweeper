@@ -19,7 +19,7 @@ BLANK = " "
 
 
 
-def create_grid(height, width, init_value):
+def create_grid(width, height, init_value):
     game_list = [] # initialize blank list
     for j in range(height * width):
         game_list.append(init_value)
@@ -40,13 +40,13 @@ def print_bottom_x_value(x):
 def show_grid(x, y, grid):
     print() # blank line
     print() # blank line
+    print_top_x_value(X)   # move X-axis label to top of grid
+    print_bottom_x_value(X)
     for j in range(y):
-        row = "{:2d}".format(y-j-1)  # first character is Y axis value
+        row = "{:2d}".format(j)  # first character is Y axis value
         for k in range(x):
             row = row + grid[k + j*x]  # add to row
         print(row)
-    print_top_x_value(X)
-    print_bottom_x_value(X)
 
 def show_level(level):
     if level == "1":
@@ -112,6 +112,8 @@ def enter_choice(width, height):
     print("You entered co-ordinates of {},{}".format(x, y))
     return (x,y)
 
+def analyze_choice(x, y, X, Y, grid):  # check spot
+    pass
 
 
 grid = create_grid(X, Y, UNKNOWN)
@@ -128,3 +130,5 @@ playing_game = True
 while playing_game:
     show_grid(X, Y, grid)
     (x,y) = enter_choice(X, Y)
+    
+    analyze_choice(x, y, X, Y, grid)
