@@ -112,8 +112,9 @@ def enter_choice(width, height):
     print("You entered co-ordinates of {},{}".format(x, y))
     return (x,y)
 
-def analyze_choice(x, y, X, Y, grid):  # check spot
-    pass
+def analyze_choice(x, y, X, Y, grid):  # check spot selected
+    print("Spot ({},{}) is {}".format(x, y, grid[x + y * Y]))
+    
 
 
 grid = create_grid(X, Y, UNKNOWN)
