@@ -113,7 +113,16 @@ def enter_choice(width, height):
     return (x,y)
 
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
-    print("Spot ({},{}) is {}".format(x, y, grid[x + y * Y]))
+    print("Spot ({},{}) is {}".format(x, y, grid[x + y * Y]))   # DEBUG
+    s = grid[x + y * Y]
+    if s == UNKNOWN_MINE:  # game over - lose
+        playing_game = False
+    if s == KNOWN_MINE:   # game over - lose
+        playing_game = False
+    if x == BLANK:
+       grid[x + y * Y] = BLANK
+    return grid
+ 
     
 
 
@@ -132,4 +141,4 @@ while playing_game:
     show_grid(X, Y, grid)
     (x,y) = enter_choice(X, Y)
     
-    analyze_choice(x, y, X, Y, grid)
+    grid = analyze_choice(x, y, X, Y, grid)
