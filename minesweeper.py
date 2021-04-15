@@ -93,14 +93,20 @@ def enter_choice(width, height):
     valid_x = False
     while not valid_x:
         x = input("Enter x value choice: ")
-        if x in range(width):
-            valid_x = True
+        if x.isnumeric():
+            x = int(x)
+            if x in range(width):
+                valid_x = True
         else:
             print("{} is not a valid value, try again".format(x))
+
+    valid_y = False
     while not valid_y:
         y = input("Enter y value choice: ")
-        if x in range(height):
-            valid_y = True
+        if y.isnumeric():
+            y = int(y)
+            if y in range(height):
+                valid_y = True
         else:
             print("{} is not a valid value, try again".format(y))
     print("You entered co-ordinates of {},{}".format(x, y))
@@ -115,7 +121,7 @@ show_grid(X, Y, grid)
 level = get_level()
 
 grid = add_mines(grid, level, UNKNOWN_MINE)
-show_grid(X, Y, grid)
+#show_grid(X, Y, grid)
 
 playing_game = True
 
