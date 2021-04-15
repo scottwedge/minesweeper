@@ -119,7 +119,7 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
         playing_game = False
     if s == KNOWN_MINE:   # game over - lose
         playing_game = False
-    if x == BLANK:
+    if x == UNKNOWN:
        grid[x + y * Y] = BLANK
     return grid
  
