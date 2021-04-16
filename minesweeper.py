@@ -13,7 +13,7 @@ MEDIUM = 50
 ADVANCED = 75
 EXPERT = 99
 UNKNOWN = "."
-UNKNOWN_MINE = "."
+UNKNOWN_MINE = "U"
 KNOWN_MINE = "M"
 BLANK = " "
 TEMP = "*"  # DEBUG
@@ -73,7 +73,7 @@ def get_level():  # determine what level of game to play
             valid_value = True
     return level
 
-def add_mines(grid, level, MINE):
+def add_mines(grid, level, UNKNOWN_MINE):
     if level == "1":
         num_mines = BEGINNER
     elif level == "2":
@@ -86,7 +86,7 @@ def add_mines(grid, level, MINE):
     for j in range(num_mines):
         random.seed()   # randomize seed
         index = random.randint(0, len(grid) - 1)
-        grid[index] = KNOWN_MINE
+        grid[index] = UNKNOWN_MINE
 
     return(grid)
     
