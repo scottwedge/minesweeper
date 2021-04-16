@@ -12,11 +12,11 @@ BEGINNER = 25 # number of mines based on difficulty level
 MEDIUM = 50
 ADVANCED = 75
 EXPERT = 99
+
 UNKNOWN = "."
 UNKNOWN_MINE = "U"
 KNOWN_MINE = "M"
 BLANK = " "
-TEMP = "*"  # DEBUG
 
 
 
@@ -124,9 +124,12 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
         playing_game = False
         print("Game over since selected mine.")    # DEBUG
     if s == UNKNOWN:
-       grid[x + y * X] = TEMP   # TEMP
+       grid[x + y * X] = BLANK   
+       check_neighbours(x, y)
     return grid
  
+def check_neighbours(x, y):
+    pass
     
 
 
