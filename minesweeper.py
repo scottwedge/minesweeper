@@ -109,7 +109,7 @@ def enter_choice(width, height):
                 valid_y = True
         else:
             print("{} is not a valid value, try again".format(y))
-    print("You entered co-ordinates of {},{}".format(x, y))
+    print("You entered (x,y) co-ordinates of ({},{})".format(x, y))
     return (x,y)
 
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
@@ -117,9 +117,11 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
     s = grid[x + y * Y]
     if s == UNKNOWN_MINE:  # game over - lose
         playing_game = False
+        print("Game over since selected mine.")    # DEBUG
     if s == KNOWN_MINE:   # game over - lose
         playing_game = False
-    if x == UNKNOWN:
+        print("Game over since selected mine.")    # DEBUG
+    if s == UNKNOWN:
        grid[x + y * Y] = BLANK
     return grid
  
