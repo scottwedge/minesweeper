@@ -83,6 +83,7 @@ def add_mines(grid, level, MINE):
         num_mines = EXPERT
 
     for j in range(num_mines):
+        random.seed()   # randomize seed
         index = random.randint(0, len(grid) - 1)
         grid[index] = KNOWN_MINE
 
