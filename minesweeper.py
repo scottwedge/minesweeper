@@ -16,6 +16,7 @@ UNKNOWN = "."
 UNKNOWN_MINE = "."
 KNOWN_MINE = "M"
 BLANK = " "
+TEMP = "*"  # DEBUG
 
 
 
@@ -114,8 +115,8 @@ def enter_choice(width, height):
     return (x,y)
 
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
-    print("Spot ({},{}) is {}".format(x, y, grid[x + y * Y]))   # DEBUG
-    s = grid[x + y * Y]
+    print("Spot ({},{}) is {}".format(x, y, grid[x + y * X]))   # DEBUG
+    s = grid[x + y * X]
     if s == UNKNOWN_MINE:  # game over - lose
         playing_game = False
         print("Game over since selected mine.")    # DEBUG
@@ -123,7 +124,7 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
         playing_game = False
         print("Game over since selected mine.")    # DEBUG
     if s == UNKNOWN:
-       grid[x + y * Y] = BLANK
+       grid[x + y * X] = TEMP   # TEMP
     return grid
  
     
