@@ -115,6 +115,7 @@ def enter_choice(width, height):
     return (x,y)
 
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
+    playing_game = True # set default
     print("Spot ({},{}) is {}".format(x, y, grid[x + y * X]))   # DEBUG
     s = grid[x + y * X]
     if s == UNKNOWN_MINE:  # game over - lose
@@ -126,7 +127,7 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
     if s == UNKNOWN:
        grid[x + y * X] = BLANK   
        check_neighbours(x, y)
-    return grid
+    return (grid, playing_game)
  
 def check_neighbours(x, y):
     pass
@@ -148,4 +149,4 @@ while playing_game:
     show_grid(X, Y, grid)
     (x,y) = enter_choice(X, Y)
     
-    grid = analyze_choice(x, y, X, Y, grid)
+    (grid, playing_game) = analyze_choice(x, y, X, Y, grid)
