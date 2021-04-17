@@ -126,11 +126,21 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
         print("Game over since selected mine.")    # DEBUG
     if s == UNKNOWN:
        grid[x + y * X] = BLANK   
-       check_neighbours(x, y)
+       grid = check_neighbours(x, y, X, Y, grid)
     return (grid, playing_game)
+
+def left_neighbour(x,y, X, Y):
+    return (x-1, y)
+
+def right_neighbour(x,y, X, Y):
+    return (x+1, y)
  
-def check_neighbours(x, y):
-    pass
+def check_neighbours(x, y, X, Y, grid):
+    if x > 0:
+        grid = left_neighbour(x,y, X, Y)
+    if x < X:
+        grid = right_neighbour(x, y, X, Y)
+    return grid
     
 
 
