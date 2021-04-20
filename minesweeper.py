@@ -46,8 +46,9 @@ def show_grid(x, y, grid):
     for j in range(y):
         row = "{:2d}".format(j)  # first character is Y axis value
         for k in range(x):
-            print(grid[k + j*x])    #DEBUG
-            print(type(grid[k + j*x]))    #DEBUG
+            print("Grid is", grid)   #DEBUG
+            print("Spot value is", grid[k + j*x])    #DEBUG
+            print("Spot type is", type(grid[k + j*x]))    #DEBUG
             row = row + grid[k + j*x]  # add to row
         print(row)
 
