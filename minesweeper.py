@@ -18,6 +18,8 @@ UNKNOWN_MINE = "U"
 KNOWN_MINE = "M"
 BLANK = " "
 
+# Where (x,y) of (0,0) is top left square
+# Where (x,y) of (X, Y) is bottom right square
 
 
 def create_grid(width, height, init_value):
@@ -46,9 +48,6 @@ def show_grid(x, y, grid):
     for j in range(y):
         row = "{:2d}".format(j)  # first character is Y axis value
         for k in range(x):
-            print("Grid is", grid)   #DEBUG
-            print("Spot value is", grid[k + j*x])    #DEBUG
-            print("Spot type is", type(grid[k + j*x]))    #DEBUG
             row = row + grid[k + j*x]  # add to row
         print(row)
 
@@ -117,43 +116,37 @@ def enter_choice(width, height):
     print("You entered (x,y) co-ordinates of ({},{})".format(x, y))
     return (x,y)
 
+def calculate_neighbours(grid, X, Y):
+    for x in range(X):
+        for y in range(Y):
+
+    return grid
+
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
     playing_game = True # set default
     print("Spot ({},{}) is {}".format(x, y, grid[x + y * X]))   # DEBUG
-    s = grid[x + y * X]
-    if s == UNKNOWN_MINE:  # game over - lose
+    spot = grid[x + y * X]
+    if spot == UNKNOWN_MINE:  # game over - lose
         playing_game = False
-        print("Game over since selected mine.")    # DEBUG
-    if s == KNOWN_MINE:   # game over - lose
+        print("Game over since selected mine.")    
+    if spot == KNOWN_MINE:   # game over - lose
         playing_game = False
-        print("Game over since selected mine.")    # DEBUG
-    if s == UNKNOWN:
+        print("Game over since selected mine.")   
+    if spot == UNKNOWN:    # reveal value
        grid[x + y * X] = BLANK   
-       grid = check_neighbours(x, y, X, Y, grid)
     return (grid, playing_game)
 
-def left_neighbour(x,y, X, Y):
-    return (x-1, y)
-
-def right_neighbour(x,y, X, Y):
-    return (x+1, y)
- 
-def check_neighbours(x, y, X, Y, grid):
-    if x > 0:
-        grid = left_neighbour(x,y, X, Y)
-    if x < X:
-        grid = right_neighbour(x, y, X, Y)
-    return grid
     
 
-
-grid = create_grid(X, Y, UNKNOWN)
+# Initialize grid
+grid = create_grid(X, Y, UNKNOWN)          # Create empty grid of size X by Y
 
 show_grid(X, Y, grid)
 
 level = get_level()
 
-grid = add_mines(grid, level, UNKNOWN_MINE)
+grid = add_mines(grid, level, UNKNOWN_MINE)   # Add mines to empty grid
+grid = calculate_neighbours(grid, X, Y)      # Calculate number of neighbour mines for each non-mine square
 #show_grid(X, Y, grid)
 
 playing_game = True
