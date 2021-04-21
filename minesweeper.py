@@ -193,7 +193,11 @@ def calculate_neighbours(grid, X, Y):
                 count_left = check_left(grid, x, y, X, Y)   # check square to the left 
                 count_right = check_right(grid, x, y, X, Y)  # check square to the right 
                 sum = count_above + count_below + count_left + count_right
-                grid[x + y * X] = str(sum)     # convert integer to string
+                if sum == 0:
+                    sum = "."  # DEBUG - replace "0" with "." to allow easy visual checking
+                else:
+                    sum = str(sum)
+                grid[x + y * X] = sum     # convert integer to string
     return grid
 
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
