@@ -144,6 +144,28 @@ def check_above(grid, x, y, X, Y):  # check three squares above
 
 def check_below(grid, x, y, X, Y):  # check three squares below          
     count = 0
+    if y < Y - 1:
+        if x > 0 and x < X - 1:  # majority of cases without boundary conditions
+            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+        elif x == 0:  # bottom left boundary conditions
+            if grid[x + (y + 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + 1 + (y + 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+        elif x == X - 1:  # bottom right boundary conditions
+            if grid[x - 1 + (y + 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + (y + 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+        else:
+            pass
+    else:   # y == Y-1
+        pass
     return count
 
 def check_left(grid, x, y, X, Y):  # check one square to the left
