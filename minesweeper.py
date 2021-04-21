@@ -142,15 +142,20 @@ def check_above(grid, x, y, X, Y):  # check three squares above
         pass
     return count
 
-def check_below(grid, x, y, X, Y):  # check three squares above          
+def check_below(grid, x, y, X, Y):  # check three squares below          
     count = 0
     return count
 
-def check_left(grid, x, y, X, Y):  # check three squares above          
+def check_left(grid, x, y, X, Y):  # check one square to the left
     count = 0
+    if x > 0:
+        if grid[x - 1 + y * X] == UNKNOWN_MINE:
+            count = count + 1
+    else:  # x = 0
+        pass
     return count
 
-def check_right(grid, x, y, X, Y):  # check three squares above          
+def check_right(grid, x, y, X, Y):  # check one square to the right
     count = 0
     return count
 
