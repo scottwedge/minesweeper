@@ -116,10 +116,54 @@ def enter_choice(width, height):
     print("You entered (x,y) co-ordinates of ({},{})".format(x, y))
     return (x,y)
 
+def check_above(grid, x, y, X, Y):  # check three squares above          
+    count = 0
+    if y > 0:
+        if x > 0 and x < X - 1:  # majority of cases without boundary conditions
+            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+        elif x == 0:  # top left boundary conditions
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+        elif x == X - 1:  # top right boundary conditions
+            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+                count = count + 1
+        else:
+            pass
+    else:   # y == 0
+        pass
+    return count
+
+def check_below(grid, x, y, X, Y):  # check three squares above          
+    count = 0
+    return count
+
+def check_left(grid, x, y, X, Y):  # check three squares above          
+    count = 0
+    return count
+
+def check_right(grid, x, y, X, Y):  # check three squares above          
+    count = 0
+    return count
+
 def calculate_neighbours(grid, X, Y):
     for x in range(X):
         for y in range(Y):
-
+            if grid[x + y * X] == UNKNOWN:  # if not a mine
+                count_above = check_above(grid, x, y, X, Y)  # check three squares above          
+                count_below = check_below(grid, x, y, X, Y)  # check three squares below 
+                count_left = check_left(grid, x, y, X, Y)   # check square to the left 
+                count_right = check_right(grid, x, y, X, Y)  # check square to the right 
+                sum = count_above + count_below + count_left + count_right
+                grid[x + y * X] = str(sum)     # convert integer to string
     return grid
 
 def analyze_choice(x, y, X, Y, grid):  # check spot selected
