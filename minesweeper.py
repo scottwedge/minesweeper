@@ -157,6 +157,9 @@ def check_left(grid, x, y, X, Y):  # check one square to the left
 
 def check_right(grid, x, y, X, Y):  # check one square to the right
     count = 0
+    if x < X - 1:
+        if grid[x + 1 + y * X] == UNKNOWN_MINE:
+            count = count + 1
     return count
 
 def calculate_neighbours(grid, X, Y):
