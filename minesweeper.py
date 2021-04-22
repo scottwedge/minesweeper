@@ -196,8 +196,8 @@ def calculate_neighbours(grid, X, Y):
                 if sum == 0:
                     sum = "."  # DEBUG - replace "0" with "." to allow easy visual checking
                 else:
-                    print(x,y, "above:", count_above,"below:", count_below,"L:", count_left,"R:",count_right)   # DEBUG
-                    sum = str(sum)
+                    #print(x,y, "above:", count_above,"below:", count_below,"L:", count_left,"R:",count_right)   # DEBUG
+                    sum = str(sum)      #DEBUG
                 grid[x + y * X] = sum     # convert integer to string
     return grid
 
