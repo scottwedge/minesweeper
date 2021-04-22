@@ -6,9 +6,9 @@
 import random
 
 # Constants
-X = 30  # width
-Y = 16  # height
-BEGINNER = 25 # number of mines based on difficulty level
+X = 5  # width
+Y = 5  # height
+BEGINNER = 1 # number of mines based on difficulty level
 MEDIUM = 50
 ADVANCED = 75
 EXPERT = 99
@@ -120,21 +120,21 @@ def check_above(grid, x, y, X, Y):  # check three squares above
     count = 0
     if y > 0:
         if x > 0 and x < X - 1:  # majority of cases without boundary conditions
-            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:  # above left
                 count = count + 1
-            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:      # directory above
                 count = count + 1
-            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:  # above right
                 count = count + 1
-        elif x == 0:  # top left boundary conditions
-            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+        elif x == 0:  # left boundary conditions
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:      # left-most
                 count = count + 1
-            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:  # second from left
                 count = count + 1
-        elif x == X - 1:  # top right boundary conditions
-            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:
+        elif x == X - 1:  # right boundary conditions
+            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:  # second from right
                 count = count + 1
-            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x + (y - 1) * X] == UNKNOWN_MINE:      # right-most
                 count = count + 1
         else:
             pass
@@ -196,6 +196,7 @@ def calculate_neighbours(grid, X, Y):
                 if sum == 0:
                     sum = "."  # DEBUG - replace "0" with "." to allow easy visual checking
                 else:
+                    print(x,y, "above:", count_above,"below:", count_below,"L:", count_left,"R:",count_right)   # DEBUG
                     sum = str(sum)
                 grid[x + y * X] = sum     # convert integer to string
     return grid
