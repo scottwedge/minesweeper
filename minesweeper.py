@@ -6,9 +6,9 @@
 import random
 
 # Constants
-X = 5  # width
-Y = 5  # height
-BEGINNER = 1 # number of mines based on difficulty level
+X = 30  # width
+Y = 15  # height
+BEGINNER = 25 # number of mines based on difficulty level
 MEDIUM = 50
 ADVANCED = 75
 EXPERT = 99
@@ -19,7 +19,7 @@ KNOWN_MINE = "M"
 BLANK = " "
 
 # Where (x,y) of (0,0) is top left square
-# Where (x,y) of (X, Y) is bottom right square
+# Where (x,y) of (X-1, Y-1) is bottom right square
 
 
 def create_grid(width, height, init_value):
@@ -146,11 +146,11 @@ def check_below(grid, x, y, X, Y):  # check three squares below
     count = 0
     if y < Y - 1:
         if x > 0 and x < X - 1:  # majority of cases without boundary conditions
-            if grid[x - 1 + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x - 1 + (y + 1) * X] == UNKNOWN_MINE:
                 count = count + 1
-            if grid[x + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x + (y + 1) * X] == UNKNOWN_MINE:
                 count = count + 1
-            if grid[x + 1 + (y - 1) * X] == UNKNOWN_MINE:
+            if grid[x + 1 + (y + 1) * X] == UNKNOWN_MINE:
                 count = count + 1
         elif x == 0:  # bottom left boundary conditions
             if grid[x + (y + 1) * X] == UNKNOWN_MINE:
@@ -225,6 +225,8 @@ show_grid(X, Y, grid)
 level = get_level()
 
 grid = add_mines(grid, level, UNKNOWN_MINE)   # Add mines to empty grid
+show_grid(X, Y, grid)
+
 grid = calculate_neighbours(grid, X, Y)      # Calculate number of neighbour mines for each non-mine square
 #show_grid(X, Y, grid)
 
