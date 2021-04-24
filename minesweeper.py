@@ -218,22 +218,23 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
     
 
 # Initialize grid
-grid = create_grid(X, Y, UNKNOWN)          # Create empty grid of size X by Y
+unknown_grid = create_grid(X, Y, UNKNOWN)  # Create empty grid of size X by Y
+known_grid = create_grid(X, Y, UNKNOWN)          # Create empty grid of size X by Y
 
-show_grid(X, Y, grid)
+show_grid(X, Y, known_grid)
 
 level = get_level()
 
-grid = add_mines(grid, level, UNKNOWN_MINE)   # Add mines to empty grid
-show_grid(X, Y, grid)
+known_grid = add_mines(known_grid, level, UNKNOWN_MINE)   # Add mines to empty grid
+show_grid(X, Y, known_grid)
 
-grid = calculate_neighbours(grid, X, Y)      # Calculate number of neighbour mines for each non-mine square
+known_grid = calculate_neighbours(known_grid, X, Y)      # Calculate number of neighbour mines for each non-mine square
 #show_grid(X, Y, grid)
 
 playing_game = True
 
 while playing_game:
-    show_grid(X, Y, grid)
+    show_grid(X, Y, known_grid)
     (x,y) = enter_choice(X, Y)
     
-    (grid, playing_game) = analyze_choice(x, y, X, Y, grid)
+    (known_grid, playing_game) = analyze_choice(x, y, X, Y, known_grid)
