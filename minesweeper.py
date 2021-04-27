@@ -201,10 +201,10 @@ def calculate_neighbours(grid, X, Y):
                 grid[x + y * X] = sum     # convert integer to string
     return grid
 
-def analyze_choice(x, y, X, Y, grid):  # check spot selected
+def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  # check spot selected
     playing_game = True # set default
-    print("Spot ({},{}) is {}".format(x, y, grid[x + y * X]))   # DEBUG
-    spot = grid[x + y * X]
+    print("Spot ({},{}) is {}".format(x, y, known_grid[x + y * X]))   # DEBUG
+    spot = known_grid[x + y * X]
     if spot == UNKNOWN_MINE:  # game over - lose
         playing_game = False
         print("Game over since selected mine.")    
@@ -212,8 +212,8 @@ def analyze_choice(x, y, X, Y, grid):  # check spot selected
         playing_game = False
         print("Game over since selected mine.")   
     if spot == UNKNOWN:    # reveal value
-       grid[x + y * X] = BLANK   
-    return (grid, playing_game)
+       unknown_grid[x + y * X] = BLANK   
+    return (unknown_grid, playing_game)    # update unknown grid values
 
     
 
@@ -234,7 +234,7 @@ known_grid = calculate_neighbours(known_grid, X, Y)      # Calculate number of n
 playing_game = True
 
 while playing_game:
-    show_grid(X, Y, known_grid)
+    show_grid(X, Y, unknown_grid)
     (x,y) = enter_choice(X, Y)
     
-    (known_grid, playing_game) = analyze_choice(x, y, X, Y, known_grid)
+    (unknown_grid, playing_game) = analyze_choice(x, y, X, Y, known_grid, unknown_grid)
