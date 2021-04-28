@@ -229,7 +229,8 @@ known_grid = add_mines(known_grid, level, UNKNOWN_MINE)   # Add mines to empty g
 show_grid(X, Y, known_grid)
 
 known_grid = calculate_neighbours(known_grid, X, Y)      # Calculate number of neighbour mines for each non-mine square
-#show_grid(X, Y, grid)
+
+show_grid(X, Y, known_grid)
 
 playing_game = True
 
