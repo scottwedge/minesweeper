@@ -116,7 +116,7 @@ def enter_choice(width, height):
     print("You entered (x,y) co-ordinates of ({},{})".format(x, y))
     return (x,y)
 
-def check_above(grid, x, y, X, Y):  # check three squares above          
+def count_above(grid, x, y, X, Y):  # check three squares above          
     count = 0
     if y > 0:
         if x > 0 and x < X - 1:  # majority of cases without boundary conditions
@@ -142,7 +142,7 @@ def check_above(grid, x, y, X, Y):  # check three squares above
         pass
     return count
 
-def check_below(grid, x, y, X, Y):  # check three squares below          
+def count_below(grid, x, y, X, Y):  # check three squares below          
     count = 0
     if y < Y - 1:
         if x > 0 and x < X - 1:  # majority of cases without boundary conditions
@@ -168,7 +168,7 @@ def check_below(grid, x, y, X, Y):  # check three squares below
         pass
     return count
 
-def check_left(grid, x, y, X, Y):  # check one square to the left
+def count_left(grid, x, y, X, Y):  # check one square to the left
     count = 0
     if x > 0:
         if grid[x - 1 + y * X] == UNKNOWN_MINE:
@@ -177,7 +177,7 @@ def check_left(grid, x, y, X, Y):  # check one square to the left
         pass
     return count
 
-def check_right(grid, x, y, X, Y):  # check one square to the right
+def count_right(grid, x, y, X, Y):  # check one square to the right
     count = 0
     if x < X - 1:
         if grid[x + 1 + y * X] == UNKNOWN_MINE:
@@ -188,11 +188,11 @@ def calculate_neighbours(grid, X, Y):
     for x in range(X):
         for y in range(Y):
             if grid[x + y * X] == UNKNOWN:  # if not a mine
-                count_above = check_above(grid, x, y, X, Y)  # check three squares above          
-                count_below = check_below(grid, x, y, X, Y)  # check three squares below 
-                count_left = check_left(grid, x, y, X, Y)   # check square to the left 
-                count_right = check_right(grid, x, y, X, Y)  # check square to the right 
-                sum = count_above + count_below + count_left + count_right
+                num_above = count_above(grid, x, y, X, Y)  # check three squares above          
+                num_below = count_below(grid, x, y, X, Y)  # check three squares below 
+                num_left = count_left(grid, x, y, X, Y)   # check square to the left 
+                num_right = count_right(grid, x, y, X, Y)  # check square to the right 
+                sum = num_above + num_below + num_left + num_right
                 if sum == 0:
                     sum = "."  # DEBUG - replace "0" with "." to allow easy visual checking
                 else:
