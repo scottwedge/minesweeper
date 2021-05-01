@@ -201,6 +201,21 @@ def calculate_neighbours(grid, X, Y):
                 grid[x + y * X] = sum     # convert integer to string
     return grid
 
+def check_left(known_grid, unknown_grid, x, y, X, Y):  # check one square to the left
+    if x > 0:
+        if known_grid[x - 1 + y * X] == UNKNOWN:
+            pass
+    else:  # x = 0
+        pass
+    return unknown_grid
+
+def check_right(known_grid, unknown_grid, x, y, X, Y):  # check one square to the right
+    if x < X - 1:
+        if known_grid[x + 1 + y * X] == UNKNOWN:
+            pass
+    return unknown_grid
+
+
 def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
     pass
     return unknown_grid
