@@ -212,9 +212,13 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  # check spot selected
     if spot == UNKNOWN_MINE:  # game over - lose
         playing_game = False
         print("Game over since selected mine.")    
+        unknown_grid[x + y * X] = UNKNOWN_MINE   # update grid
+        show_grid(X, Y, unknown_grid)            # show grid with reason for fail
     if spot == KNOWN_MINE:   # game over - lose
         playing_game = False
         print("Game over since selected mine.")   
+        unknown_grid[x + y * X] = KNOWN_MINE   	# update grid
+        show_grid(X, Y, unknown_grid)          	# show grid with reason for fail
     if spot == UNKNOWN:    # reveal value
        unknown_grid[x + y * X] = BLANK   
        unknown_grid = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
