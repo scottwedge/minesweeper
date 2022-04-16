@@ -71,7 +71,8 @@ def get_level():  # determine what level of game to play
     while not valid_value:
         level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Advanced\n 4. Expert\n")
         if level not in ["1", "2", "3", "4"]:
-            print("{} is not a valid value ... try again!".format(level))
+            print()  # blank spacer line
+            print("\033[1m{} is not a valid value ... try again!\033[0m".format(level))
         else:
             show_level(level)
             valid_value = True
@@ -104,7 +105,7 @@ def enter_choice(width, height):
             if x in range(width):
                 valid_x = True
         else:
-            print("{} is not a valid value, try again".format(x))
+            print("\033[1m{} is not a valid value, try again\033[0m".format(x))
 
     valid_y = False
     while not valid_y:
