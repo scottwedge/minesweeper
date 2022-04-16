@@ -115,7 +115,7 @@ def enter_choice(width, height):
                 valid_y = True
         else:
             print("{} is not a valid value, try again".format(y))
-    print("You entered (x,y) co-ordinates of ({},{})".format(x, y))
+    print("You entered (x,y) co-ordinates of ({},{}). ".format(x, y), end = "")
     return (x,y)
 
 def count_above(grid, x, y, X, Y):  # check three squares above          
@@ -226,7 +226,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
     # check spot selected in 'known_grid' 
     # then update 'unknown_grid' with that value
     playing_game = True # set default
-    print("Spot ({},{}) is {}".format(x, y, known_grid[x + y * X]))   # DEBUG
+    print("Spot ({},{}) is '{}'".format(x, y, known_grid[x + y * X]))   # DEBUG
     spot = known_grid[x + y * X]  # check spot selected in 'known_grid' 
     if spot == UNKNOWN_MINE:  # game over - lose
         playing_game = False
