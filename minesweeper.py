@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 # Simple MineSweeper program
+# Record all the positions and neighbour counts in 'known_grid'.
+# Show all user guesses in 'unknown_grid'.
 
 # Import
 import random
@@ -220,30 +222,36 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
     pass
     return unknown_grid
 
-def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  # check spot selected
+def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  
+    # check spot selected in 'known_grid' 
+    # then update 'unknown_grid' with that value
     playing_game = True # set default
     print("Spot ({},{}) is {}".format(x, y, known_grid[x + y * X]))   # DEBUG
-    spot = known_grid[x + y * X]
+    spot = known_grid[x + y * X]  # check spot selected in 'known_grid' 
     if spot == UNKNOWN_MINE:  # game over - lose
         playing_game = False
         print("Game over since selected mine.")    
         unknown_grid[x + y * X] = UNKNOWN_MINE   # update grid
         show_grid(X, Y, unknown_grid)            # show grid with reason for fail
-    if spot == KNOWN_MINE:   # game over - lose
+    elif spot == KNOWN_MINE:   # game over - lose
         playing_game = False
         print("Game over since selected mine.")   
         unknown_grid[x + y * X] = KNOWN_MINE   	# update grid
         show_grid(X, Y, unknown_grid)          	# show grid with reason for fail
-    if spot == UNKNOWN:    # reveal value
+    elif spot == UNKNOWN:    # reveal value
        unknown_grid[x + y * X] = BLANK   
        unknown_grid = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+    else:  # spot is numeric value
+       unknown_grid[x + y * X] = spot
+       unknown_grid = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+       
     return (unknown_grid, playing_game)    # update unknown grid values
 
     
 
 # Initialize grid
 unknown_grid = create_grid(X, Y, UNKNOWN)  # Create empty grid of size X by Y
-known_grid = create_grid(X, Y, UNKNOWN)          # Create empty grid of size X by Y
+known_grid = create_grid(X, Y, UNKNOWN)    # Create empty grid of size X by Y
 
 show_grid(X, Y, known_grid)
 
@@ -259,7 +267,7 @@ show_grid(X, Y, known_grid)
 playing_game = True
 
 while playing_game:
-    show_grid(X, Y, unknown_grid)
+    show_grid(X, Y, unknown_grid)  # Show user guesses
     (x,y) = enter_choice(X, Y)
     
     (unknown_grid, playing_game) = analyze_choice(x, y, X, Y, known_grid, unknown_grid)
