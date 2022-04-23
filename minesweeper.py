@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
 # Simple MineSweeper program
-# Record all the positions and neighbour counts in 'known_grid'.
-# Show all user guesses in 'unknown_grid'.
+# Initially configure all spots in 'unknown_grid' as "." aka unknown.
+# Randomly position the mines and then calculate all neighbour counts in 'known_grid'.
+# Copy user guess (x,y) value from 'known_grid' into 'unknown_grid'.
 
 # Import
 import random
 
 # Constants
-X = 30  # width
-Y = 15  # height
-BEGINNER = 25 # number of mines based on difficulty level
+X = 30  # width (left-most column = 0)
+Y = 15  # height (top-most row = 0)
+BEGINNER = 25 # number of mines based on difficulty level (out of 450 spots)
 MEDIUM = 50
 ADVANCED = 75
 EXPERT = 99
