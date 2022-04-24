@@ -222,10 +222,43 @@ def check_right(known_grid, unknown_grid, x, y, X, Y):  # check one square to th
 
 def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
     # Recursively examine all eight positions around spot
+    # Start with spot one above and work clockwise
     # Skip if value of a position is known,
     # Continue search until encounter a mine or number (of neighbouring mines)
-    pass
-    return unknown_grid
+    # Check spot above
+    if y > 0:
+        return analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
+    
+    # Check spot above and one to the right
+    if y > 0 and x < X:
+        return analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
+
+    # Check spot one to the right
+    if x < X:
+        return analyze_choice(x+1, y, X, Y, known_grid, unknown_grid)
+        
+    # Check spot one down and one to the right
+    if y < Y and x < X:
+        return analyze_choice(x+1, y+1, X, Y, known_grid, unknown_grid)
+
+    # Check spot one down 
+    if y < Y:
+        return analyze_choice(x, y+1, X, Y, known_grid, unknown_grid)
+        
+    # Check spot one down and one to the left
+    if y < Y and x > 0:
+        return analyze_choice(x-1, y+1, X, Y, known_grid, unknown_grid)
+        
+    # Check spot one to the left
+    if x > 0:
+        return analyze_choice(x-1, y, X, Y, known_grid, unknown_grid)
+        
+    # Check spot one above and one to the left
+    if x > 0 and y > 0:
+        return analyze_choice(x-1, y-1, X, Y, known_grid, unknown_grid)
+        
+#    pass
+#    return unknown_grid
 
 def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  
     # check spot selected in 'known_grid' 
