@@ -15,6 +15,7 @@ BEGINNER = 25 # number of mines based on difficulty level (out of 450 spots)
 MEDIUM = 50
 ADVANCED = 75
 EXPERT = 99
+CUSTOM = 0
 
 UNKNOWN = "."
 UNKNOWN_MINE = "U"
@@ -61,8 +62,10 @@ def show_level(level):
         print("Game level is Medium")
     elif level == "3":
         print("Game level is Advanced")
-    else:   # level == 4
+    elif level == "4":
         print("Game level is Expert")
+    else:   # level == 5  # Custom grid
+        print("Game level is Custom")
       
            
 def get_level():  # determine what level of game to play
@@ -70,8 +73,8 @@ def get_level():  # determine what level of game to play
     print() # blank line
     valid_value = False
     while not valid_value:
-        level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Advanced\n 4. Expert\n")
-        if level not in ["1", "2", "3", "4"]:
+        level = input("What level of game do you want:\n 1. Beginner\n 2. Medium\n 3. Advanced\n 4. Expert\n 5. Custom\n")
+        if level not in ["1", "2", "3", "4", "5"]:
             print()  # blank spacer line
             print("\033[1m{} is not a valid value ... try again!\033[0m".format(level))
         else:
@@ -86,8 +89,10 @@ def add_mines(grid, level, UNKNOWN_MINE):
         num_mines = MEDIUM
     elif level == "3":
         num_mines = ADVANCED
-    else:    # level == 4
+    elif level == "4":
         num_mines = EXPERT
+    else:
+        num_mines = CUSTOM
 
     for j in range(num_mines):
         random.seed()   # randomize seed
