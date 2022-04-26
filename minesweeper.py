@@ -304,11 +304,19 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
 
 
 def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  
+    # First check if spot is already known in 'unknown_grid'
+    # If it is known, then quit and return (to prevent infinite recursion loops)
     # check spot selected in 'known_grid' 
     # then update 'unknown_grid' with that value
     playing_game = True # set default
+    unknown_spot = unknown_grid[x + y * X]  # check spot selected in 'unknown_grid' 
+    print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
+
+    if unknown_spot != UNKNOWN:  # spot is known is not unknown
+        return (unknown_grid, playing_game)    # return since this value already unmasked
+        
     print("Spot ({},{}) is '{}'".format(x, y, known_grid[x + y * X]))   # DEBUG
-    spot = known_grid[x + y * X]  # check spot selected in 'known_grid' 
+    spot = known_grid[x + y * X]  # check spot selected in 'known_grid'   #Duplicate
     if spot == UNKNOWN_MINE:  # game over - lose
         playing_game = False
         print("Game over since selected mine.")    
