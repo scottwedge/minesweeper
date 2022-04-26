@@ -231,6 +231,7 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
     # Start with spot one above and work clockwise
     # Skip if value of a position is known,
     # Continue search until encounter a mine or number (of neighbouring mines)
+
     # Check spot above
     if y > 0:
         return analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
@@ -287,7 +288,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
        (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
     else:  # spot is numeric value
        unknown_grid[x + y * X] = spot
-       (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+ #      (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
        
     return (unknown_grid, playing_game)    # update unknown grid values
 
