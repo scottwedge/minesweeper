@@ -32,17 +32,20 @@ def create_grid(width, height, init_value):
         game_list.append(init_value)
     return game_list
 
+
 def print_top_x_value(x):
     s = "  " # initialize blank string for two digit wide y column
     for j in range(x):
         s = s + str(j // 10)
     print(s)
 
+
 def print_bottom_x_value(x):
     s = "  " # initialize blank string for two digit wide y column
     for j in range(x):
         s = s + str(j % 10)
     print(s)
+
 
 def show_grid(x, y, grid):
     print() # blank line
@@ -51,10 +54,10 @@ def show_grid(x, y, grid):
     print_bottom_x_value(X)
     for j in range(y):
         row = "{:2d}".format(j)  # first character is Y axis value
-#        print("DEBUG_____", grid)  #DEBUG
         for k in range(x):
             row = row + grid[k + j*x]  # add to row
         print(row)
+
 
 def show_level(level):
     if level == "1":
@@ -83,6 +86,7 @@ def get_level():  # determine what level of game to play
             valid_value = True
     return level
 
+
 def add_mines(grid, level, UNKNOWN_MINE):
     if level == "1":
         num_mines = BEGINNER
@@ -93,15 +97,33 @@ def add_mines(grid, level, UNKNOWN_MINE):
     elif level == "4":
         num_mines = EXPERT
     else:
-        num_mines = CUSTOM
+        num_mines = 1
+        pass  # Invalid option
 
     for j in range(num_mines):
         random.seed()   # randomize seed
         index = random.randint(0, len(grid) - 1)
         grid[index] = UNKNOWN_MINE
+    return grid
 
-    return(grid)
+
+def create_custom_grid(grid):
+    # Create a single row of mines in middle of grid (to help test debugging)
+    min = 210
+    max = 230
+    for j in range(min, max+1):
+        grid[j] = UNKNOWN_MINE 
+    return grid
+
+
+def create_grid(grid, level, UNKNOWN_MINE):
+    if level == "5":
+        grid = create_custom_grid()
+    else:
+        grid = add_mines(grid, level, UNKNOWN_MINE)
+    return grid
     
+
 def enter_choice(width, height):
     print() # blank line
     valid_x = False
@@ -125,6 +147,7 @@ def enter_choice(width, height):
             print("{} is not a valid value, try again".format(y))
     print("You entered (x,y) co-ordinates of ({},{}). ".format(x, y), end = "")
     return (x,y)
+
 
 def count_above(grid, x, y, X, Y):  # check three squares above          
     count = 0
@@ -152,6 +175,7 @@ def count_above(grid, x, y, X, Y):  # check three squares above
         pass
     return count
 
+
 def count_below(grid, x, y, X, Y):  # check three squares below          
     count = 0
     if y < Y - 1:
@@ -178,6 +202,7 @@ def count_below(grid, x, y, X, Y):  # check three squares below
         pass
     return count
 
+
 def count_left(grid, x, y, X, Y):  # check one square to the left
     count = 0
     if x > 0:
@@ -187,12 +212,14 @@ def count_left(grid, x, y, X, Y):  # check one square to the left
         pass
     return count
 
+
 def count_right(grid, x, y, X, Y):  # check one square to the right
     count = 0
     if x < X - 1:
         if grid[x + 1 + y * X] == UNKNOWN_MINE:
             count = count + 1
     return count
+
 
 def calculate_neighbours(grid, X, Y):
     for x in range(X):
@@ -211,6 +238,7 @@ def calculate_neighbours(grid, X, Y):
                 grid[x + y * X] = sum     # convert integer to string
     return grid
 
+
 def check_left(known_grid, unknown_grid, x, y, X, Y):  # check one square to the left
     if x > 0:
         if known_grid[x - 1 + y * X] == UNKNOWN:
@@ -218,6 +246,7 @@ def check_left(known_grid, unknown_grid, x, y, X, Y):  # check one square to the
     else:  # x = 0
         pass
     return unknown_grid
+
 
 def check_right(known_grid, unknown_grid, x, y, X, Y):  # check one square to the right
     if x < X - 1:
@@ -266,6 +295,7 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
         
 #    pass
 #    return unknown_grid
+
 
 def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  
     # check spot selected in 'known_grid' 
