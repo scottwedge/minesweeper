@@ -100,7 +100,7 @@ def add_mines(grid, level, UNKNOWN_MINE):
         num_mines = 1
         pass  # Invalid option
 
-    print("DEBUG____ grid=", grid)  #DEBUG
+#    print("DEBUG____ grid=", grid)  #DEBUG
 
     for j in range(num_mines):
         random.seed()   # randomize seed
@@ -109,18 +109,22 @@ def add_mines(grid, level, UNKNOWN_MINE):
     return grid
 
 
-def create_custom_grid(grid, level, UNKNOWN_MINE):
-    # Create a single row of mines in middle of grid (to help test debugging)
-    min = 210
-    max = 230
-    for j in range(min, max+1):
+def make_custom_grid(grid, level, UNKNOWN_MINE):
+    # Create a two rows of mines in middle of grid (to help test debugging)
+    min1 = 150
+    max1 = 179
+    min2 = 300
+    max2 = 329
+    for j in range(min1, max1 + 1):
+        grid[j] = UNKNOWN_MINE 
+    for j in range(min2, max2 + 1):
         grid[j] = UNKNOWN_MINE 
     return grid
 
 
 def create_grid(grid, level, UNKNOWN_MINE):
     if level == "5":
-        grid = create_custom_grid(grid, level, UNKNOWN_MINE)
+        grid = make_custom_grid(grid, level, UNKNOWN_MINE)
     else:
         grid = add_mines(grid, level, UNKNOWN_MINE)
     return grid
@@ -334,7 +338,8 @@ show_grid(X, Y, known_grid)
 
 level = get_level()
 
-known_grid = add_mines(known_grid, level, UNKNOWN_MINE)   # Add mines to empty grid
+#known_grid = add_mines(known_grid, level, UNKNOWN_MINE)   # Add mines to empty grid
+known_grid = create_grid(known_grid, level, UNKNOWN_MINE)   # Add mines to empty grid
 show_grid(X, Y, known_grid)
 
 known_grid = calculate_neighbours(known_grid, X, Y)      # Calculate number of neighbour mines for each non-mine square
