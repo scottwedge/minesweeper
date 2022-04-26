@@ -26,7 +26,7 @@ BLANK = " "
 # Where (x,y) of (X-1, Y-1) is bottom right square
 
 
-def create_grid(width, height, init_value):
+def init_grid(width, height, init_value):
     game_list = [] # initialize blank list
     for j in range(height * width):
         game_list.append(init_value)
@@ -100,6 +100,8 @@ def add_mines(grid, level, UNKNOWN_MINE):
         num_mines = 1
         pass  # Invalid option
 
+    print("DEBUG____ grid=", grid)  #DEBUG
+
     for j in range(num_mines):
         random.seed()   # randomize seed
         index = random.randint(0, len(grid) - 1)
@@ -107,7 +109,7 @@ def add_mines(grid, level, UNKNOWN_MINE):
     return grid
 
 
-def create_custom_grid(grid):
+def create_custom_grid(grid, level, UNKNOWN_MINE):
     # Create a single row of mines in middle of grid (to help test debugging)
     min = 210
     max = 230
@@ -118,7 +120,7 @@ def create_custom_grid(grid):
 
 def create_grid(grid, level, UNKNOWN_MINE):
     if level == "5":
-        grid = create_custom_grid()
+        grid = create_custom_grid(grid, level, UNKNOWN_MINE)
     else:
         grid = add_mines(grid, level, UNKNOWN_MINE)
     return grid
@@ -325,8 +327,8 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
     
 
 # Initialize grid
-unknown_grid = create_grid(X, Y, UNKNOWN)  # Create empty grid of size X by Y
-known_grid = create_grid(X, Y, UNKNOWN)    # Create empty grid of size X by Y
+unknown_grid = init_grid(X, Y, UNKNOWN)  # Create empty grid of size X by Y
+known_grid = init_grid(X, Y, UNKNOWN)    # Create empty grid of size X by Y
 
 show_grid(X, Y, known_grid)
 
