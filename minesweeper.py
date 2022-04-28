@@ -269,36 +269,37 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
 
     # Check spot above
     if y > 0:
-        return analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
     
     # Check spot above and one to the right
     if y > 0 and x < X:
-        return analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
 
     # Check spot one to the right
     if x < X:
-        return analyze_choice(x+1, y, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x+1, y, X, Y, known_grid, unknown_grid)
         
     # Check spot one down and one to the right
     if y < Y and x < X:
-        return analyze_choice(x+1, y+1, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x+1, y+1, X, Y, known_grid, unknown_grid)
 
     # Check spot one down 
     if y < Y:
-        return analyze_choice(x, y+1, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x, y+1, X, Y, known_grid, unknown_grid)
         
     # Check spot one down and one to the left
     if y < Y and x > 0:
-        return analyze_choice(x-1, y+1, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x-1, y+1, X, Y, known_grid, unknown_grid)
         
     # Check spot one to the left
     if x > 0:
-        return analyze_choice(x-1, y, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x-1, y, X, Y, known_grid, unknown_grid)
         
     # Check spot one above and one to the left
     if x > 0 and y > 0:
-        return analyze_choice(x-1, y-1, X, Y, known_grid, unknown_grid)
+       (unknown_grid, playing_game) = analyze_choice(x-1, y-1, X, Y, known_grid, unknown_grid)
         
+    return (unknown_grid, playing_game)    # update unknown grid values
 #    pass
 #    return unknown_grid
 
@@ -306,13 +307,12 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
 def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  
     # First check if spot is already known in 'unknown_grid'
     # If it is known, then quit and return (to prevent infinite recursion loops)
-    # check spot selected in 'known_grid' 
-    # then update 'unknown_grid' with that value
+    # Else: Copy spot value from 'known_grid' to 'unknown_grid' 
     playing_game = True # set default
     unknown_spot = unknown_grid[x + y * X]  # check spot selected in 'unknown_grid' 
     print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
 
-    if unknown_spot != UNKNOWN:  # spot is known is not unknown
+    if unknown_spot != UNKNOWN:  # spot is known if not unknown
         return (unknown_grid, playing_game)    # return since this value already unmasked
         
     print("Spot ({},{}) is '{}'".format(x, y, known_grid[x + y * X]))   # DEBUG
