@@ -309,6 +309,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
     # If it is known, then quit and return (to prevent infinite recursion loops)
     # Else: Copy spot value from 'known_grid' to 'unknown_grid' 
     playing_game = True # set default
+    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
     unknown_spot = unknown_grid[x + y * X]  # check spot selected in 'unknown_grid' 
     print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
 
