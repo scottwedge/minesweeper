@@ -338,10 +338,10 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
         show_grid(X, Y, unknown_grid)          	# show grid with reason for fail
     elif spot == UNKNOWN:    # reveal value
        unknown_grid[x + y * X] = BLANK   
-#       (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+       (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
     else:  # spot is numeric value
        unknown_grid[x + y * X] = spot
- #      (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+       (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
        
     return (unknown_grid, playing_game)    # update unknown grid values
 
