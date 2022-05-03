@@ -274,17 +274,17 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
     
     # Check spot above and one to the right
     print("Check spot above and to the right")  #DEBUG
-    if y > 0 and x < X-2:
+    if y > 0 and x < X-1:
         (unknown_grid, playing_game) = analyze_choice(x+1, y-1, X, Y, known_grid, unknown_grid)
 
     # Check spot one to the right
     print("Check spot one to the right")  #DEBUG
-    if x < X-2:
+    if x < X-1:
         (unknown_grid, playing_game) = analyze_choice(x+1, y, X, Y, known_grid, unknown_grid)
         
     # Check spot one down and one to the right
     print("Check spot below and to the right")  #DEBUG
-    if y < Y-1 and x < X-2:
+    if y < Y-1 and x < X-1:
         (unknown_grid, playing_game) = analyze_choice(x+1, y+1, X, Y, known_grid, unknown_grid)
 
     # Check spot one down 
