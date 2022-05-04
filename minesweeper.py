@@ -351,9 +351,6 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
 #       (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
         return (unknown_grid, playing_game)    # return since this value already unmasked
        
-#    return (unknown_grid, playing_game)    # update unknown grid values
-
-    
 
 # Initialize grid
 unknown_grid = init_grid(X, Y, UNKNOWN)  # Create empty grid of size X by Y
@@ -378,4 +375,5 @@ while playing_game:
     (x,y) = enter_choice(X, Y)
     
     (unknown_grid, playing_game) = analyze_choice(x, y, X, Y, known_grid, unknown_grid)
-    (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+    if playing_game:
+        (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
