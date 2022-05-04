@@ -338,7 +338,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
         return (unknown_grid, playing_game)    # return since this value already unmasked
     elif spot == KNOWN_MINE:   # game over - lose
         playing_game = False
-        print("Game over since selected mine.")   
+        print("\033[1m\033[6mGame over since selected mine.\033[0m")    
         unknown_grid[x + y * X] = KNOWN_MINE   	# update grid
         show_grid(X, Y, unknown_grid)          	# show grid with reason for fail
         return (unknown_grid, playing_game)    # return since this value already unmasked
