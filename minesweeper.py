@@ -268,42 +268,42 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
     # Continue search until encounter a mine or number (of neighbouring mines)
 
     # Check spot above
-    print("Check spot above")  #DEBUG
+#    print("Check spot above")  #DEBUG
     if y > 0:
         (unknown_grid, playing_game) = analyze_choice(x, y-1, X, Y, known_grid, unknown_grid)
     
     # Check spot above and one to the right
-    print("Check spot above and to the right")  #DEBUG
+#    print("Check spot above and to the right")  #DEBUG
     if y > 0 and x < X-1:
         (unknown_grid, playing_game) = analyze_choice(x+1, y-1, X, Y, known_grid, unknown_grid)
 
     # Check spot one to the right
-    print("Check spot one to the right")  #DEBUG
+#    print("Check spot one to the right")  #DEBUG
     if x < X-1:
         (unknown_grid, playing_game) = analyze_choice(x+1, y, X, Y, known_grid, unknown_grid)
         
     # Check spot one down and one to the right
-    print("Check spot below and to the right")  #DEBUG
+#    print("Check spot below and to the right")  #DEBUG
     if y < Y-1 and x < X-1:
         (unknown_grid, playing_game) = analyze_choice(x+1, y+1, X, Y, known_grid, unknown_grid)
 
     # Check spot one down 
-    print("Check spot below")  #DEBUG
+#    print("Check spot below")  #DEBUG
     if y < Y-2:
         (unknown_grid, playing_game) = analyze_choice(x, y+1, X, Y, known_grid, unknown_grid)
         
     # Check spot one down and one to the left
-    print("Check spot below and to the left")  #DEBUG
+#    print("Check spot below and to the left")  #DEBUG
     if y < Y-2 and x > 0:
         (unknown_grid, playing_game) = analyze_choice(x-1, y+1, X, Y, known_grid, unknown_grid)
         
     # Check spot one to the left
-    print("Check spot to the left")  #DEBUG
+#    print("Check spot to the left")  #DEBUG
     if x > 0:
         (unknown_grid, playing_game) = analyze_choice(x-1, y, X, Y, known_grid, unknown_grid)
         
     # Check spot one above and one to the left
-    print("Check spot above and to the left")  #DEBUG
+#    print("Check spot above and to the left")  #DEBUG
     if x > 0 and y > 0:
        (unknown_grid, playing_game) = analyze_choice(x-1, y-1, X, Y, known_grid, unknown_grid)
         
@@ -317,7 +317,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
     # If it is known, then quit and return (to prevent infinite recursion loops)
     # Else: Copy spot value from 'known_grid' to 'unknown_grid' 
     playing_game = True # set default
-    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
+#    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
     unknown_spot = unknown_grid[x + y * X]  # check spot selected in 'unknown_grid' 
     print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
 
