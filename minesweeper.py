@@ -323,12 +323,14 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
     print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
 
     if unknown_spot != UNKNOWN:  # spot is known if not unknown
+        if unknown_spot == KNOWN_MINE:
+            playing_game = False  # Lose game since deliberately selected known mine value
         return (unknown_grid, playing_game)    # return since this value already unmasked
         
 #    print("Spot ({},{}) is '{}'".format(x, y, known_grid[x + y * X]))   # DEBUG
     spot = known_grid[x + y * X]  # check spot selected in 'known_grid'   #Duplicate
-    if spot == UNKNOWN_MINE:  # show it but continue playing
-        unknown_grid[x + y * X] = UNKNOWN_MINE   # update grid
+    if spot == UNKNOWN_MINE:  # show it as known mine but continue playing
+        unknown_grid[x + y * X] = KNOWN_MINE   # update grid
         show_grid(X, Y, unknown_grid)            # show grid with reason for fail
         return (unknown_grid, playing_game)    # return since this value already unmasked
     elif spot == KNOWN_MINE:   # game over - lose
