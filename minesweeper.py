@@ -325,6 +325,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
     if unknown_spot != UNKNOWN:  # spot is known if not unknown
         if unknown_spot == KNOWN_MINE:
             playing_game = False  # Lose game since deliberately selected known mine value
+            print("\033[1m\033[6mGame over since selected known mine at spot({},{}).\033[0m".format(x,y))    
         return (unknown_grid, playing_game)    # return since this value already unmasked
         
 #    print("Spot ({},{}) is '{}'".format(x, y, known_grid[x + y * X]))   # DEBUG
