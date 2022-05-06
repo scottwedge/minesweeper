@@ -315,6 +315,7 @@ def reveal_neighbours(x, y, X, Y, known_grid, unknown_grid):
 def analyze_choice(x, y, X, Y, known_grid, unknown_grid):  
     # First check if spot is already known in 'unknown_grid'
     # If it is known, then quit and return (to prevent infinite recursion loops)
+    # If it is a mine, then quit and return
     # Else: Copy spot value from 'known_grid' to 'unknown_grid' 
     playing_game = True # set default
 #    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
@@ -326,13 +327,7 @@ def analyze_choice(x, y, X, Y, known_grid, unknown_grid):
         
 #    print("Spot ({},{}) is '{}'".format(x, y, known_grid[x + y * X]))   # DEBUG
     spot = known_grid[x + y * X]  # check spot selected in 'known_grid'   #Duplicate
-    if spot == UNKNOWN_MINE:  # game over - lose
-        playing_game = False
-        print("\033[1m\033[6mGame over since selected mine at spot({},{}).\033[0m".format(x,y))    
-
-#print("\033[6m  blinking  \033[0m")  #blink
-#print("\033[1m   bold  \033[0m")  #bold
-
+    if spot == UNKNOWN_MINE:  # show it but continue playing
         unknown_grid[x + y * X] = UNKNOWN_MINE   # update grid
         show_grid(X, Y, unknown_grid)            # show grid with reason for fail
         return (unknown_grid, playing_game)    # return since this value already unmasked
