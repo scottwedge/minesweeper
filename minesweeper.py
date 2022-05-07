@@ -132,11 +132,15 @@ def create_grid(grid, level, UNKNOWN_MINE):
 
 def enter_choice(width, height):
     print() # blank line
+    print("Enter 'm' or 'M' in front of x to guess at mine position")
     valid_x = False
+    mine_guess = False  # Add ability to guess at mine locations
     while not valid_x:
         x = input("Enter x value choice: ")
-        if x.isnumeric():
-            x = int(x)
+        if x[0] == "m" or x[0] == "M":
+            mine_guess = True
+        if x[-1].isnumeric():
+            x = int(x[-1])
             if x in range(width):
                 valid_x = True
         else:
@@ -152,7 +156,7 @@ def enter_choice(width, height):
         else:
             print("{} is not a valid value, try again".format(y))
     print("You entered (x,y) co-ordinates of ({},{}). ".format(x, y), end = "")
-    return (x,y)
+    return (x,y,mine_guess)
 
 
 def count_above(grid, x, y, X, Y):  # check three squares above          
@@ -370,8 +374,8 @@ playing_game = True
 
 while playing_game:
     show_grid(X, Y, unknown_grid)  # Show user guesses
-    (x,y) = enter_choice(X, Y)
+    (x,y,mine) = enter_choice(X, Y)
     
-    (unknown_grid, playing_game) = analyze_choice(x, y, X, Y, known_grid, unknown_grid)
+    (unknown_grid, playing_game) = analyze_choice(x, y, mine, X, Y, known_grid, unknown_grid)
     if playing_game:
-        (unknown_grid, playing_game) = reveal_neighbours(x, y, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = reveal_neighbours(x, y, mine, X, Y, known_grid, unknown_grid)
