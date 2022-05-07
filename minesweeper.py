@@ -139,8 +139,12 @@ def enter_choice(width, height):
         x = input("Enter x value choice: ")
         if x[0] == "m" or x[0] == "M":
             mine_guess = True
-        if x[-1].isnumeric():
-            x = int(x[-1])
+            if "m" in x:
+                x = x.replace("m","")  # Remove "m" from value
+            if "M" in x:
+                x = x.replace("M","")  # Remove "M" from value
+        if x.isnumeric():
+            x = int(x)
             if x in range(width):
                 valid_x = True
         else:
