@@ -57,6 +57,8 @@ def show_grid(x, y, grid):
         for k in range(x):
             row = row + grid[k + j*x]  # add to row
         print(row)
+    print_top_x_value(X)   # move X-axis label to top of grid
+    print_bottom_x_value(X)
 
 
 def show_level(level):
