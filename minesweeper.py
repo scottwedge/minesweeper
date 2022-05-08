@@ -298,29 +298,29 @@ def reveal_neighbours(x, y, mine, X, Y, known_grid, unknown_grid):
     # Check spot one down 
 #    print("Check spot below")  #DEBUG
     if y < Y-2:
-        (unknown_grid, playing_game) = analyze_choice(x, y+1, mine, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x, y+1, is_mine, X, Y, known_grid, unknown_grid)
         
     # Check spot one down and one to the left
 #    print("Check spot below and to the left")  #DEBUG
     if y < Y-2 and x > 0:
-        (unknown_grid, playing_game) = analyze_choice(x-1, y+1, mine, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x-1, y+1, is_mine, X, Y, known_grid, unknown_grid)
         
     # Check spot one to the left
 #    print("Check spot to the left")  #DEBUG
     if x > 0:
-        (unknown_grid, playing_game) = analyze_choice(x-1, y, mine, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = analyze_choice(x-1, y, is_mine, X, Y, known_grid, unknown_grid)
         
     # Check spot one above and one to the left
 #    print("Check spot above and to the left")  #DEBUG
     if x > 0 and y > 0:
-       (unknown_grid, playing_game) = analyze_choice(x-1, y-1, mine, X, Y, known_grid, unknown_grid)
+       (unknown_grid, playing_game) = analyze_choice(x-1, y-1, is_mine, X, Y, known_grid, unknown_grid)
         
     return (unknown_grid, playing_game)    # update unknown grid values
 #    pass
 #    return unknown_grid
 
 
-def analyze_choice(x, y, mine, X, Y, known_grid, unknown_grid):  
+def analyze_choice(x, y, is_mine, X, Y, known_grid, unknown_grid):  
     # First check if spot is already known in 'unknown_grid'
     # If it is known, then quit and return (to prevent infinite recursion loops)
     # If it is a mine, then quit and return
@@ -332,7 +332,7 @@ def analyze_choice(x, y, mine, X, Y, known_grid, unknown_grid):
 
     if unknown_spot != UNKNOWN:  # spot is known if not unknown
         if unknown_spot == KNOWN_MINE:
-            if not mine:
+            if not is_mine:
                 playing_game = False  # Lose game since deliberately selected known mine value
                 print("\033[1m\033[6mGame over since selected known mine at spot({},{}).\033[0m".format(x,y))    
             else:
@@ -354,7 +354,7 @@ def analyze_choice(x, y, mine, X, Y, known_grid, unknown_grid):
         return (unknown_grid, playing_game)    # return since this value already unmasked
     elif spot == UNKNOWN:    # reveal value
         unknown_grid[x + y * X] = BLANK   
-        (unknown_grid, playing_game) = reveal_neighbours(x, y, mine, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = reveal_neighbours(x, y, is_mine, X, Y, known_grid, unknown_grid)
         return (unknown_grid, playing_game)    # return since this value already unmasked
     else:  # spot is numeric value
         unknown_grid[x + y * X] = spot
@@ -382,8 +382,8 @@ playing_game = True
 
 while playing_game:
     show_grid(X, Y, unknown_grid)  # Show user guesses
-    (x,y,mine) = enter_choice(X, Y)
+    (x, y, is_mine) = enter_choice(X, Y)
     
-    (unknown_grid, playing_game) = analyze_choice(x, y, mine, X, Y, known_grid, unknown_grid)
+    (unknown_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, unknown_grid)
     if playing_game:
-        (unknown_grid, playing_game) = reveal_neighbours(x, y, mine, X, Y, known_grid, unknown_grid)
+        (unknown_grid, playing_game) = reveal_neighbours(x, y, is_mine, X, Y, known_grid, unknown_grid)
