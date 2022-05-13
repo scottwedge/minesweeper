@@ -139,6 +139,8 @@ def enter_choice(width, height):
     mine_guess = False  # Add ability to guess at mine locations
     while not valid_x:
         x = input("Enter x value choice: ")
+        if x == "":
+            continue
         if x[0] == "m" or x[0] == "M":
             mine_guess = True
             if "m" in x:
