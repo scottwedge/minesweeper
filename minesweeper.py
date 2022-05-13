@@ -332,6 +332,20 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid):
     unknown_spot = game_grid[x + y * X]  # check spot selected in 'game_grid' 
     print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
 
+    if is_mine:
+        if (unknown_spot == UNKNOWN_MINE) or (unknown_spot == KNOWN_MINE):
+            is_mine = False  # Update value for neighbour recursion
+            playing_game = True
+            game_grid[x + y * X] = KNOWN_MINE   # update grid
+#            show_grid(X, Y, game_grid)            # show grid with reason for fail
+            return (game_grid, playing_game)    # return updated grid
+        else:  # Fail since did not correctly select a mine
+            is_mine = False  # Update value for neighbour recursion
+            playing_game = False
+            game_grid[x + y * X] = unknown_spot   # update grid
+            show_grid(X, Y, game_grid)            # show grid with reason for fail
+            return (game_grid, playing_game)    # return updated grid
+
     if unknown_spot != UNKNOWN:  # spot is known if not unknown
         if unknown_spot == KNOWN_MINE:
             if not is_mine:
