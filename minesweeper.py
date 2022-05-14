@@ -332,10 +332,12 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid):
     playing_game = True # set default
 #    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
     unknown_spot = game_grid[x + y * X]  # check spot selected in 'game_grid' 
-    print("Spot ({},{}) is '{}'".format(x, y, unknown_spot))   # DEBUG
+    known_spot = known_grid[x + y * X]  # check spot selected in 'known_grid' 
+    print("Game grid spot ({},{}) is '{}'".format(x, y, unknown_spot), end = "")   # DEBUG
+    print(" Known grid spot is '{}'".format(known_spot))   # DEBUG
 
     if is_mine:
-        if (unknown_spot == UNKNOWN_MINE) or (unknown_spot == KNOWN_MINE):
+        if (known_spot == UNKNOWN_MINE) or (known_spot == KNOWN_MINE):
             is_mine = False  # Update value for neighbour recursion
             playing_game = True
             game_grid[x + y * X] = KNOWN_MINE   # update grid
