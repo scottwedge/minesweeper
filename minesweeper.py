@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 
 # Simple MineSweeper program
 # Initially configure all spots in 'game_grid' as "." aka unknown.
@@ -376,7 +376,7 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid):
             return (game_grid, playing_game)    # return since this value already unmasked
         elif spot == UNKNOWN:    # reveal value
             game_grid[x + y * X] = BLANK   
-            (game_grid, playing_game) = reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid)
+            (game_grid, playing_game) = reveal_neighbours(x, y, False, X, Y, known_grid, game_grid)
             return (game_grid, playing_game)    # return since this value already unmasked
         else:  # spot is numeric value
             game_grid[x + y * X] = spot
@@ -408,4 +408,4 @@ while playing_game:
     
     (game_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid)
     if playing_game:
-        (game_grid, playing_game) = reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = reveal_neighbours(x, y, False, X, Y, known_grid, game_grid)
