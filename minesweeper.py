@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 
 # Simple MineSweeper program
 # Initially configure all spots in 'game_grid' as "." aka unknown.
