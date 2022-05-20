@@ -273,7 +273,7 @@ def check_right(known_grid, game_grid, x, y, X, Y):  # check one square to the r
     return game_grid
 
 
-def reveal_neighbours(x, y, mine, X, Y, known_grid, game_grid):
+def reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid):
     # Recursively examine all eight positions around spot
     # Start with spot one above and work clockwise
     # Skip if value of a position is known,
@@ -282,22 +282,22 @@ def reveal_neighbours(x, y, mine, X, Y, known_grid, game_grid):
     # Check spot above
 #    print("Check spot above")  #DEBUG
     if y > 0:
-        (game_grid, playing_game) = analyze_choice(x, y-1, mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x, y-1, is_mine, X, Y, known_grid, game_grid)
     
     # Check spot above and one to the right
 #    print("Check spot above and to the right")  #DEBUG
     if y > 0 and x < X-1:
-        (game_grid, playing_game) = analyze_choice(x+1, y-1, mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x+1, y-1, is_mine, X, Y, known_grid, game_grid)
 
     # Check spot one to the right
 #    print("Check spot one to the right")  #DEBUG
     if x < X-1:
-        (game_grid, playing_game) = analyze_choice(x+1, y, mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x+1, y, is_mine, X, Y, known_grid, game_grid)
         
     # Check spot one down and one to the right
 #    print("Check spot below and to the right")  #DEBUG
     if y < Y-1 and x < X-1:
-        (game_grid, playing_game) = analyze_choice(x+1, y+1, mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x+1, y+1, is_mine, X, Y, known_grid, game_grid)
 
     # Check spot one down 
 #    print("Check spot below")  #DEBUG
