@@ -344,6 +344,7 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid):
             show_grid(X, Y, game_grid)            # show updated grid
             return (game_grid, playing_game)    # return updated grid
         else:  # Fail since did not correctly select a mine
+            print("DEBUG, known_spot = ", known_spot)  #DEBUG
             is_mine = False  # Update value for neighbour recursion
             playing_game = False
             print("\033[1m\033[6mGame over! Did not select desired mine at spot({},{}).\033[0m".format(x,y))    
