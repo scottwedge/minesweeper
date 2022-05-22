@@ -323,15 +323,12 @@ def reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid):
 #    pass
 #    return game_grid
 
-
-def analyze_neighbour(x, y, is_mine, X, Y, known_grid, game_grid):  
-    pass
-
-def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid):  
+def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, is_neighbour):  
     # First check if spot is already known in 'game_grid'
     # If it is known, then quit and return (to prevent infinite recursion loops)
     # If it is a mine, then quit and return
     # Else: Copy spot value from 'known_grid' to 'game_grid' 
+    # Use "is_neighbour" parameter to prevent game ending if neighbour is a known or unknown mine
     playing_game = True # set default
 #    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
     unknown_spot = game_grid[x + y * X]  # check spot selected in 'game_grid' 
