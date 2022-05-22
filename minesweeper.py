@@ -324,6 +324,9 @@ def reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid):
 #    return game_grid
 
 
+def analyze_neighbour(x, y, is_mine, X, Y, known_grid, game_grid):  
+    pass
+
 def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid):  
     # First check if spot is already known in 'game_grid'
     # If it is known, then quit and return (to prevent infinite recursion loops)
