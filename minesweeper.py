@@ -278,46 +278,47 @@ def reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid):
     # Start with spot one above and work clockwise
     # Skip if value of a position is known,
     # Continue search until encounter a mine or number (of neighbouring mines)
+    is_neighbour = True
 
     # Check spot above
 #    print("Check spot above")  #DEBUG
     if y > 0:
-        (game_grid, playing_game) = analyze_choice(x, y-1, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x, y-1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
     
     # Check spot above and one to the right
 #    print("Check spot above and to the right")  #DEBUG
     if y > 0 and x < X-1:
-        (game_grid, playing_game) = analyze_choice(x+1, y-1, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x+1, y-1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
 
     # Check spot one to the right
 #    print("Check spot one to the right")  #DEBUG
     if x < X-1:
-        (game_grid, playing_game) = analyze_choice(x+1, y, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x+1, y, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one down and one to the right
 #    print("Check spot below and to the right")  #DEBUG
     if y < Y-1 and x < X-1:
-        (game_grid, playing_game) = analyze_choice(x+1, y+1, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x+1, y+1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
 
     # Check spot one down 
 #    print("Check spot below")  #DEBUG
     if y < Y-2:
-        (game_grid, playing_game) = analyze_choice(x, y+1, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x, y+1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one down and one to the left
 #    print("Check spot below and to the left")  #DEBUG
     if y < Y-2 and x > 0:
-        (game_grid, playing_game) = analyze_choice(x-1, y+1, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x-1, y+1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one to the left
 #    print("Check spot to the left")  #DEBUG
     if x > 0:
-        (game_grid, playing_game) = analyze_choice(x-1, y, is_mine, X, Y, known_grid, game_grid)
+        (game_grid, playing_game) = analyze_choice(x-1, y, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one above and one to the left
 #    print("Check spot above and to the left")  #DEBUG
     if x > 0 and y > 0:
-       (game_grid, playing_game) = analyze_choice(x-1, y-1, is_mine, X, Y, known_grid, game_grid)
+       (game_grid, playing_game) = analyze_choice(x-1, y-1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     return (game_grid, playing_game)    # update unknown grid values
 #    pass
@@ -336,16 +337,20 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, is_neighbour):
     print("Game grid spot ({},{}) is '{}'".format(x, y, unknown_spot), end = "")   # DEBUG
     print(" Known grid spot is '{}'".format(known_spot))   # DEBUG
 
+    if is_neighbour:
+        is_mine = False  # Always False if checking neighbouring values
+                         # Only True if the is the user's attempt at selecting a mine
+
     if is_mine:
         if (known_spot == UNKNOWN_MINE) or (known_spot == KNOWN_MINE):
-            is_mine = False  # Update value for neighbour recursion
+#            is_mine = False  # Update value for neighbour recursion
             playing_game = True
             game_grid[x + y * X] = KNOWN_MINE   # update grid
             show_grid(X, Y, game_grid)            # show updated grid
             return (game_grid, playing_game)    # return updated grid
         else:  # Fail since did not correctly select a mine
             print("DEBUG, known_spot = ", known_spot)  #DEBUG
-            is_mine = False  # Update value for neighbour recursion
+#            is_mine = False  # Update value for neighbour recursion
             playing_game = False
             print("\033[1m\033[6mGame over! Did not select desired mine at spot({},{}).\033[0m".format(x,y))    
             game_grid[x + y * X] = known_spot   # update grid
@@ -407,6 +412,6 @@ while playing_game:
     show_grid(X, Y, game_grid)  # Show user guesses
     (x, y, is_mine) = enter_choice(X, Y)
     
-    (game_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid)
+    (game_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, False)
     if playing_game:
         (game_grid, playing_game) = reveal_neighbours(x, y, False, X, Y, known_grid, game_grid)
