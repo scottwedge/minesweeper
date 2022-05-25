@@ -102,8 +102,6 @@ def add_mines(grid, level, UNKNOWN_MINE):
         num_mines = 1
         pass  # Invalid option
 
-#    print("DEBUG____ grid=", grid)  #DEBUG
-
     for j in range(num_mines):
         random.seed()   # randomize seed
         index = random.randint(0, len(grid) - 1)
@@ -281,42 +279,34 @@ def reveal_neighbours(x, y, is_mine, X, Y, known_grid, game_grid):
     is_neighbour = True
 
     # Check spot above
-#    print("Check spot above")  #DEBUG
     if y > 0:
         (game_grid, playing_game) = analyze_choice(x, y-1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
     
     # Check spot above and one to the right
-#    print("Check spot above and to the right")  #DEBUG
     if y > 0 and x < X-1:
         (game_grid, playing_game) = analyze_choice(x+1, y-1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
 
     # Check spot one to the right
-#    print("Check spot one to the right")  #DEBUG
     if x < X-1:
         (game_grid, playing_game) = analyze_choice(x+1, y, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one down and one to the right
-#    print("Check spot below and to the right")  #DEBUG
     if y < Y-1 and x < X-1:
         (game_grid, playing_game) = analyze_choice(x+1, y+1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
 
     # Check spot one down 
-#    print("Check spot below")  #DEBUG
     if y < Y-2:
         (game_grid, playing_game) = analyze_choice(x, y+1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one down and one to the left
-#    print("Check spot below and to the left")  #DEBUG
     if y < Y-2 and x > 0:
         (game_grid, playing_game) = analyze_choice(x-1, y+1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one to the left
-#    print("Check spot to the left")  #DEBUG
     if x > 0:
         (game_grid, playing_game) = analyze_choice(x-1, y, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
     # Check spot one above and one to the left
-#    print("Check spot above and to the left")  #DEBUG
     if x > 0 and y > 0:
        (game_grid, playing_game) = analyze_choice(x-1, y-1, is_mine, X, Y, known_grid, game_grid, is_neighbour)
         
@@ -331,7 +321,6 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, is_neighbour):
     # Else: Copy spot value from 'known_grid' to 'game_grid' 
     # Use "is_neighbour" parameter to prevent game ending if neighbour is a known or unknown mine
     playing_game = True # set default
-#    print("DEBUG____ [x + y * X] = ", x + y * X)  # IndexError when index is max plus one
     unknown_spot = game_grid[x + y * X]  # check spot selected in 'game_grid' 
     known_spot = known_grid[x + y * X]  # check spot selected in 'known_grid' 
     print("Game grid spot ({},{}) is '{}'".format(x, y, unknown_spot), end = "")   # DEBUG
