@@ -360,7 +360,9 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, is_neighbour):
     else: # Spot is unknown
         spot = known_grid[x + y * X]  # check spot selected in 'known_grid'   #Duplicate
         if spot == UNKNOWN_MINE:  # show it as known mine but continue playing
-            game_grid[x + y * X] = KNOWN_MINE   # update grid
+            playing_game = False
+            print("\033[1m\033[6mGame over since selected unknown mine at spot({},{}).\033[0m".format(x,y))    
+            game_grid[x + y * X] = UNKNOWN_MINE   # update grid
             show_grid(X, Y, game_grid)            # show grid with reason for fail
             return (game_grid, playing_game)    # return since this value already unmasked
         elif spot == KNOWN_MINE:   # game over - lose
