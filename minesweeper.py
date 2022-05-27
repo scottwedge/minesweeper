@@ -329,6 +329,10 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, is_neighbour):
     if is_neighbour:
         is_mine = False  # Always False if checking neighbouring values
                          # Only True if the is the user's attempt at selecting a mine
+        pass  # Add code to examine values surrounded location entered by user
+    else:  # Case where handling user entered location
+        pass  # Add code to examine value of user entered location
+
 
     if is_mine:
         if (known_spot == UNKNOWN_MINE) or (known_spot == KNOWN_MINE):
