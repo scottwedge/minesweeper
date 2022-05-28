@@ -418,5 +418,8 @@ while playing_game:
     (game_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, False)
     if playing_game:
         (game_grid, playing_game) = reveal_neighbours(x, y, False, X, Y, known_grid, game_grid)
-        if count_unknowns(game_grid) == 0:
+        num_unknowns = count_unknowns(game_grid)
+        if num_unknowns == 0:
             playing_game = False
+        else:    # DEBUG
+            print("Number of unknown spots remaining is {}".format(num_unknowns))
