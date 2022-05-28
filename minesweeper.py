@@ -165,8 +165,12 @@ def enter_choice(width, height):
     return (x,y,mine_guess)
 
 
-def count_unknowns(grid, X, Y):  # If no unknown values then game over and user is successful
-    pass
+def count_unknowns(grid):  # If no unknown values then game over and user is successful
+    count = 0
+    for j in grid:
+        if j == UNKNOWN:
+            count = count + 1
+    return count
 
 
 def count_above(grid, x, y, X, Y):  # check three squares above          
@@ -414,3 +418,5 @@ while playing_game:
     (game_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, False)
     if playing_game:
         (game_grid, playing_game) = reveal_neighbours(x, y, False, X, Y, known_grid, game_grid)
+        if count_unknowns(game_grid) == 0:
+            playing_game = False
