@@ -165,6 +165,10 @@ def enter_choice(width, height):
     return (x,y,mine_guess)
 
 
+def count_unknowns(grid, X, Y):  # If no unknown values then game over and user is successful
+    pass
+
+
 def count_above(grid, x, y, X, Y):  # check three squares above          
     count = 0
     if y > 0:
