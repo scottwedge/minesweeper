@@ -89,6 +89,23 @@ def get_level():  # determine what level of game to play
     return level
 
 
+def get_manual_or_auto():  # Determine if manually enter values or if automatically enter values
+    print() # blank line
+    print() # blank line
+    valid_value = False
+    while not valid_value:
+        value = input("Choose to manually or automatically guess at values: \n M or m: Manual method\n A or a: Automatic method\n")
+        if value not in ["a" or "A" or "m" or "M"]:
+            print()  # blank spacer line
+            print("\033[1m{} is not a valid value ... try again!\033[0m".format(value))
+        else:
+            if value in ["a" or "A"]:
+                manual_bool = False
+            else:
+                manual_bool = True
+    return manual_bool
+    
+
 def add_mines(grid, level, UNKNOWN_MINE):
     if level == "1":
         num_mines = BEGINNER
