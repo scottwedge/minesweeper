@@ -99,10 +99,10 @@ def get_manual_or_auto():  # Determine if manually enter values or if automatica
             print()  # blank spacer line
             print("\033[1m{} is not a valid value ... try again!\033[0m".format(value))
         else:
-            if value in ["a" or "A"]:
-                manual_bool = False
-            else:
+            if value in ["m" or "M"]:
                 manual_bool = True
+            else:
+                manual_bool = False
     return manual_bool
     
 
@@ -417,6 +417,8 @@ known_grid = init_grid(X, Y, UNKNOWN)    # Create empty grid of size X by Y
 show_grid(X, Y, known_grid)
 
 level = get_level()
+
+manual = get_manual_or_auto() # True if manual; False if auto
 
 #known_grid = add_mines(known_grid, level, UNKNOWN_MINE)   # Add mines to empty grid
 known_grid = create_grid(known_grid, level, UNKNOWN_MINE)   # Add mines to empty grid
