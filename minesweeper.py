@@ -95,11 +95,12 @@ def get_manual_or_auto():  # Determine if manually enter values or if automatica
     valid_value = False
     while not valid_value:
         value = input("Choose to manually or automatically guess at values: \n M or m: Manual method\n A or a: Automatic method\n")
-        if value not in ["a" or "A" or "m" or "M"]:
+        print("DEBUG  Entered value: ",value)  #DEBUG
+        if value not in ["a", "A", "m",  "M"]:
             print()  # blank spacer line
             print("\033[1m{} is not a valid value ... try again!\033[0m".format(value))
         else:
-            if value in ["m" or "M"]:
+            if value in ["m", "M"]:
                 manual_bool = True
             else:
                 manual_bool = False
