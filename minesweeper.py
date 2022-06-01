@@ -100,6 +100,7 @@ def get_manual_or_auto():  # Determine if manually enter values or if automatica
             print()  # blank spacer line
             print("\033[1m{} is not a valid value ... try again!\033[0m".format(value))
         else:
+            valid_value = True
             if value in ["m", "M"]:
                 manual_bool = True
             else:
