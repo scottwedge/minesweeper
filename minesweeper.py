@@ -103,8 +103,12 @@ def get_manual_or_auto():  # Determine if manually enter values or if automatica
             valid_value = True
             if value in ["m", "M"]:
                 manual_bool = True
+                print()  # blank spacer line
+                print("\033[1mYou selected manual method\033[0m")
             else:
                 manual_bool = False
+                print()  # blank spacer line
+                print("\033[1mYou selected automatic method\033[0m")
     return manual_bool
     
 
