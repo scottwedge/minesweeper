@@ -354,8 +354,8 @@ def analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, is_neighbour):
     playing_game = True # set default
     unknown_spot = game_grid[x + y * X]  # check spot selected in 'game_grid' 
     known_spot = known_grid[x + y * X]  # check spot selected in 'known_grid' 
-    print("Game grid spot ({},{}) is '{}'".format(x, y, unknown_spot), end = "")   # DEBUG
-    print(" Known grid spot is '{}'".format(known_spot))   # DEBUG
+#    print("Game grid spot ({},{}) is '{}'".format(x, y, unknown_spot), end = "")   # DEBUG
+#    print(" Known grid spot is '{}'".format(known_spot))   # DEBUG
 
     if is_neighbour:
         is_mine = False  # Always False if checking neighbouring values
