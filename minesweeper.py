@@ -153,7 +153,7 @@ def create_grid(grid, level, UNKNOWN_MINE):
     return grid
     
 
-def enter_choice(width, height):
+def enter_choice(width, height, manual):
     print() # blank line
     print("Enter 'm' or 'M' in front of x to guess at mine position")
     valid_x = False
@@ -438,7 +438,7 @@ playing_game = True
 
 while playing_game:
     show_grid(X, Y, game_grid)  # Show user guesses
-    (x, y, is_mine) = enter_choice(X, Y)
+    (x, y, is_mine) = enter_choice(X, Y, manual)
     
     (game_grid, playing_game) = analyze_choice(x, y, is_mine, X, Y, known_grid, game_grid, False)
     if playing_game:
